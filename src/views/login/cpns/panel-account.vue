@@ -4,7 +4,7 @@
       ref="accountFormRef"
       :rules="rules"
       :label-position="labelPosition"
-      label-width="100px"
+      label-width="60px"
       :model="accountInfo"
       style="max-width: 460px"
     >
@@ -23,8 +23,8 @@
 </template>
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
-
 const labelPosition = ref('left')
 const accountInfo = reactive({
   name: '',
@@ -35,8 +35,8 @@ const rules = reactive<FormRules>({
   name: [
     { required: true, message: '必须输入帐号信息~', trigger: 'blur' },
     {
-      pattern: /^[a-z0-9]{6,20}$/,
-      message: '必须是6~20数字或字母组成~',
+      pattern: /^[a-z0-9]{6,10}$/,
+      message: '必须是6~10数字或字母组成~',
       trigger: 'blur',
     },
   ],
@@ -51,7 +51,14 @@ const rules = reactive<FormRules>({
 })
 
 const loginAction = () => {
-  console.log('login', accountInfo)
+  accountFormRef.value?.validate((valid, fields) => {
+    if (valid) {
+      const name = accountInfo.name,
+        password = accountInfo.password
+    } else {
+      ElMessage.error('请输入正确的格式再登录')
+    }
+  })
 }
 
 defineExpose({

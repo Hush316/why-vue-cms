@@ -4,7 +4,7 @@
       ref="phoneFormRef"
       :rules="rules"
       :label-position="labelPosition"
-      label-width="100px"
+      label-width="60px"
       :model="phoneInfo"
       style="max-width: 460px"
     >

@@ -45,14 +45,16 @@ import PanelPhone from './panel-phone.vue'
 
 const isKeep = ref(false)
 const activeName = ref('account')
-const accountRef = ref()
+const accountRef = ref<InstanceType<typeof PanelAccount>>()
 
 const handlerLogin = () => {
+  // 手机登录
   if (activeName.value === 'phone') {
     console.log('phone login')
-    accountRef.value.loginAction()
     return
   }
+  //账号登录
+  accountRef.value?.loginAction()
   console.log('account login')
 }
 </script>
