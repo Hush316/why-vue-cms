@@ -1,15 +1,20 @@
 <template>
-  <div>login</div>
+  <div class="login">
+    <LoginPanel></LoginPanel>
+  </div>
 </template>
-<script setup lang="ts">
-import zjRequest from '@/service'
 
-zjRequest
-  .get({
-    url: 'https://www.fastmock.site/mock/2225f79588ee07c7f072d9513d602fb4/tableList/api/fruit',
-  })
-  .then((res) => {
-    console.log(res)
-  })
+<script setup lang="ts">
+import LoginPanel from './cpns/login-panel.vue'
 </script>
-<style scoped></style>
+
+<style lang="less" scoped>
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: url('../../assets/img/login-bg.svg');
+}
+</style>
