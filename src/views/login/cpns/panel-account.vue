@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import useLoginStore from '@/stores/login'
 import type { AccountType } from '@/types/login'
+import { localCache } from '@/utils/cache'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
@@ -31,8 +32,8 @@ import { reactive, ref } from 'vue'
 const loginStore = useLoginStore()
 const labelPosition = ref('left')
 const accountInfo = reactive<AccountType>({
-  name: '',
-  password: '',
+  name: localCache.getCache('name') ?? '',
+  password: localCache.getCache('password') ?? '',
 })
 const accountFormRef = ref<FormInstance>()
 const rules = reactive<FormRules>({
@@ -54,12 +55,24 @@ const rules = reactive<FormRules>({
   ],
 })
 
-const loginAction = () => {
+const loginAction = (isKeep: boolean) => {
   accountFormRef.value?.validate((valid, fields) => {
     if (valid) {
+      // 验证成功发送登录请求
       const name = accountInfo.name,
         password = accountInfo.password
-      loginStore.loginAccountAction({ name, password })
+      loginStore.loginAccountAction({ name, password }).then(() => {
+        // 记住密码的逻辑
+        if (isKeep) {
+          localCache.setCache('name', name)
+          localCache.setCache('password', password)
+          localCache.setCache('isKeep', isKeep)
+        } else {
+          localCache.removeCache('name')
+          localCache.removeCache('password')
+          localCache.removeCache('isKeep')
+        }
+      })
     } else {
       ElMessage.error('请输入正确的格式再登录')
     }
