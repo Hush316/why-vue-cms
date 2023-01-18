@@ -22,11 +22,15 @@
   </div>
 </template>
 <script setup lang="ts">
+import useLoginStore from '@/stores/login'
+import type { AccountType } from '@/types/login'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
+
+const loginStore = useLoginStore()
 const labelPosition = ref('left')
-const accountInfo = reactive({
+const accountInfo = reactive<AccountType>({
   name: '',
   password: '',
 })
@@ -55,6 +59,7 @@ const loginAction = () => {
     if (valid) {
       const name = accountInfo.name,
         password = accountInfo.password
+      loginStore.loginAccountAction({ name, password })
     } else {
       ElMessage.error('请输入正确的格式再登录')
     }
