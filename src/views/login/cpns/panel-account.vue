@@ -33,7 +33,7 @@ const rules = reactive<FormRules>({
 })
 
 const loginAction = (isKeep: boolean) => {
-  accountFormRef.value?.validate((valid, fields) => {
+  accountFormRef.value?.validate((valid) => {
     if (valid) {
       // 验证成功发送登录请求
       const name = accountInfo.name,

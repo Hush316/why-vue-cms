@@ -6,27 +6,15 @@
       </el-icon>
     </div>
     <div class="content">
-      <div class="breadcrumb">
-        <el-breadcrumb :separator-icon="ArrowRight">
-          <el-breadcrumb-item :to="{ path: '/' }"
-            >homepage</el-breadcrumb-item
-          >
-          <el-breadcrumb-item
-            >promotion management</el-breadcrumb-item
-          >
-          <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-          <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
-      <div class="info">
-        <HeadInfo></HeadInfo>
-      </div>
+      <HeadCrumb></HeadCrumb>
+
+      <HeadInfo></HeadInfo>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ArrowRight } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import HeadCrumb from './cpns/HeadCrumb.vue'
 import HeadInfo from './cpns/HeadInfo.vue'
 const emit = defineEmits(['foldChange'])
 

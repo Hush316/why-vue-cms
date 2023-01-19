@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useLoginStore from '@/stores/login'
-import { useRouter } from 'vue-router'
+import { mapPathToMenu } from '@/utils/mapMenus'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 defineProps({
   isCollapse: {
@@ -17,6 +19,13 @@ const userMenus = loginStore.userMenus
 const handleItemClick = (item: any) => {
   router.push(item.url)
 }
+
+// 刷新页面
+const route = useRoute()
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, userMenus)
+  return pathMenu.id + ''
+})
 </script>
 <template>
   <div class="main-menu">
@@ -27,7 +36,7 @@ const handleItemClick = (item: any) => {
     <div class="menu">
       <el-menu
         :collapse="isCollapse"
-        default-active="39"
+        :default-active="defaultActive"
         text-color="#b7bdc3"
         active-text-color="#fff"
         background-color="#001529"

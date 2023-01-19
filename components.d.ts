@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    HeadCrumb: typeof import('./src/components/main-header/cpns/HeadCrumb.vue')['default']
     HeadInfo: typeof import('./src/components/main-header/cpns/HeadInfo.vue')['default']
     Info: typeof import('./src/components/main-header/cpns/HeadInfo.vue')['default']
     MainHeader: typeof import('./src/components/main-header/index.vue')['default']
