@@ -29,7 +29,14 @@ export function mapMenusToRoutes(userMenus: any[]) {
       const route = localRoutes.find(
         (item) => item.path === submenu.url,
       )
-      route && routes.push(route)
+      if (route) {
+        // 给route的顶层菜单增加重定向功能(但是只需要添加一次即可)
+        if (!routes.find((item) => item.path === menu.url)) {
+          routes.push({ path: menu.url, redirect: route.path })
+        }
+        // 将二级菜单对应的路由增加到route中
+        routes.push(route)
+      }
 
       //记录第一个被匹配到的菜单
       if (!firstMenu && route) firstMenu = submenu
@@ -51,4 +58,22 @@ export function mapPathToMenu(path: string, userMenus: any[]) {
       }
     }
   }
+}
+
+interface BreadCrumbs {
+  name: string
+  path: string
+}
+// 获取当前页面面包屑
+export function mapPathToBreadcrumbs(path: string, userMenus: any[]) {
+  const breadCrumbs: BreadCrumbs[] = []
+  for (const menu of userMenus) {
+    for (const submenu of menu.children) {
+      if (submenu.url === path) {
+        breadCrumbs.push({ name: menu.name, path: menu.url })
+        breadCrumbs.push({ name: submenu.name, path: submenu.url })
+      }
+    }
+  }
+  return breadCrumbs
 }
