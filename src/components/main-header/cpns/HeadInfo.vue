@@ -1,17 +1,37 @@
 <script setup lang="ts">
 import { LOGIN_TOKEN } from '@/global/constants'
+import i18n from '@/locales'
 import { localCache } from '@/utils/cache'
 import { useRouter } from 'vue-router'
-
 const router = useRouter()
 
 const handleExitClick = () => {
   localCache.removeCache(LOGIN_TOKEN)
   router.push('/login')
 }
+const toggleLocale = (mode: 'zh' | 'en') => {
+  i18n.global.locale = mode
+}
 </script>
 <template>
   <div class="header-info">
+    <div class="language">
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <el-icon size="20"><Location /></el-icon>
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="toggleLocale('zh')"
+              >中文</el-dropdown-item
+            >
+            <el-dropdown-item @click="toggleLocale('en')"
+              >English</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
     <div class="operation">
       <span>
         <el-icon><Message /></el-icon>
@@ -65,7 +85,7 @@ const handleExitClick = () => {
 .operation {
   display: inline-flex;
   margin-right: 20px;
-
+  margin-left: 10px;
   span {
     position: relative;
     display: flex;
