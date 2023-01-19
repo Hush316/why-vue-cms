@@ -7,7 +7,8 @@ class Cache {
   storage: Storage
 
   constructor(type: CacheType) {
-    this.storage = type === CacheType.Local ? localStorage : sessionStorage
+    this.storage =
+      type === CacheType.Local ? localStorage : sessionStorage
   }
 
   setCache(key: string, value: any) {

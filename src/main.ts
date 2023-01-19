@@ -4,13 +4,11 @@ import 'normalize.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/css/index.less'
-import registerIcons from './global/register-icons'
-
-// import 'element-plus/theme-chalk/el-message.css'
+import icons from './global/register-icons'
 
 const app = createApp(App)
 
-app.use(registerIcons)
+app.use(icons)
 app.use(pinia)
 app.use(router)
 

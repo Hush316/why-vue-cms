@@ -1,26 +1,3 @@
-<template>
-  <div>
-    <el-form
-      ref="accountFormRef"
-      :rules="rules"
-      :label-position="labelPosition"
-      label-width="60px"
-      :model="accountInfo"
-      style="max-width: 460px"
-    >
-      <el-form-item label="账号" prop="name">
-        <el-input v-model="accountInfo.name" />
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input
-          show-password
-          type="password"
-          v-model="accountInfo.password"
-        />
-      </el-form-item>
-    </el-form>
-  </div>
-</template>
 <script setup lang="ts">
 import useLoginStore from '@/stores/login'
 import type { AccountType } from '@/types/login'
@@ -83,4 +60,28 @@ defineExpose({
   loginAction,
 })
 </script>
+<template>
+  <div>
+    <el-form
+      ref="accountFormRef"
+      :rules="rules"
+      :label-position="labelPosition"
+      label-width="60px"
+      :model="accountInfo"
+      style="max-width: 460px"
+    >
+      <el-form-item label="账号" prop="name">
+        <el-input v-model="accountInfo.name" />
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input
+          show-password
+          type="password"
+          v-model="accountInfo.password"
+        />
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
 <style scoped></style>

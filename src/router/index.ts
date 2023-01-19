@@ -12,12 +12,12 @@ const router = createRouter({
     {
       path: '/main',
       name: 'Main',
-      component: () => import('@/views/main/Main.vue'),
+      component: () => import('@/views/main/index.vue'),
     },
     {
       path: '/login',
       name: 'Login',
-      component: () => import('@/views/login/Login.vue'),
+      component: () => import('@/views/login/index.vue'),
     },
     {
       path: '/:pathMatch(.*)',
@@ -29,7 +29,7 @@ const router = createRouter({
 // 导航守卫
 router.beforeEach((to, from) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  if (to.path === '/main' && !token) {
+  if (to.path.startsWith('/main') && !token) {
     return '/login'
   }
 })

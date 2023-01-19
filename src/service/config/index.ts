@@ -18,7 +18,7 @@ if (import.meta.env.PROD) {
   BASE_URL = 'http://152.136.185.210:5000'
 }
 
-console.log(BASE_URL, import.meta.env.MODE)
+// console.log(BASE_URL, import.meta.env.MODE)
 
 // 3.通过创建.env文件直接创建变量
 // console.log(import.meta.env.VITE_URL)
