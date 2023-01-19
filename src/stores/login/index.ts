@@ -7,13 +7,17 @@ import {
 } from '@/service/login/index'
 import type { AccountType } from '@/types/login'
 import { localCache } from '@/utils/cache'
-import { mapMenusToRoutes } from '@/utils/mapMenus'
+import {
+  mapMenuListToPermissions,
+  mapMenusToRoutes,
+} from '@/utils/mapMenus'
 import { defineStore } from 'pinia'
 
 interface LoginState {
   token: string
   userInfo: any
   userMenus: any
+  permissions: string[]
 }
 
 const useLoginStore = defineStore('login', {
@@ -21,6 +25,7 @@ const useLoginStore = defineStore('login', {
     token: '',
     userInfo: {},
     userMenus: [],
+    permissions: [],
   }),
   actions: {
     async loginAccountAction(account: AccountType) {
@@ -42,6 +47,9 @@ const useLoginStore = defineStore('login', {
       this.userMenus = userMenus
       localCache.setCache('userMenus', userMenus)
 
+      //获取登录用户的按钮权限
+      const permissions = mapMenuListToPermissions(userMenus)
+      this.permissions = permissions
       //动态添加路由
       const routes = mapMenusToRoutes(userMenus)
       routes.forEach((route) => {
@@ -60,7 +68,9 @@ const useLoginStore = defineStore('login', {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
-
+        //获取登录用户的按钮权限
+        const permissions = mapMenuListToPermissions(userMenus)
+        this.permissions = permissions
         // 动态添加路由
         const routes = mapMenusToRoutes(userMenus)
         routes.forEach((route) => {
