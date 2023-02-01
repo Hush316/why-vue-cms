@@ -22,8 +22,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
 import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
 
 const labelPosition = ref('left')
 const phoneInfo = reactive({

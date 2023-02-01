@@ -105,10 +105,10 @@
 </template>
 
 <script setup lang="ts">
-import userSystemStore from '@/stores/main/system'
-import { storeToRefs } from 'pinia'
-import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import userSystemStore from '@/stores/main/system'
+import { formatUTC } from '@/utils/format'
 
 const systemStore = userSystemStore()
 

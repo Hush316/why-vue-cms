@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import UserSearch from '@/views/main/system/user/cpns/user-search.vue'
 import UserContent from '@/views/main/system/user/cpns/user-content.vue'
-import { ref } from 'vue'
 
 const contentRef = ref<InstanceType<typeof UserContent>>()
 const handleQueryClick = (formData: any) => {

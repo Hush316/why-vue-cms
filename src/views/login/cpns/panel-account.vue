@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import useLoginStore from '@/stores/login'
 import type { AccountType } from '@/types/login'
 import { localCache } from '@/utils/cache'
-import type { FormInstance, FormRules } from 'element-plus'
-import { ElMessage } from 'element-plus'
-import { reactive, ref } from 'vue'
 
 const loginStore = useLoginStore()
 const labelPosition = ref('left')

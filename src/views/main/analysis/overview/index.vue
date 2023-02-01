@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import usePermission from '@/hooks/permissions'
+
 const permissionType = 'department'
 const { isCreate } = usePermission(permissionType)
 </script>

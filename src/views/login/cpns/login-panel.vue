@@ -39,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { localCache } from '@/utils/cache'
 import { ref } from 'vue'
+import { localCache } from '@/utils/cache'
 import PanelAccount from './panel-account.vue'
 import PanelPhone from './panel-phone.vue'
 

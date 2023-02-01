@@ -28,9 +28,9 @@
 //   router.push('/login')
 // }
 
+import { ref } from 'vue'
 import MainHeader from '@/components/main-header/index.vue'
 import MainMenu from '@/components/main-menu/index.vue'
-import { ref } from 'vue'
 
 // 菜单折叠
 const isCollapse = ref(false)
