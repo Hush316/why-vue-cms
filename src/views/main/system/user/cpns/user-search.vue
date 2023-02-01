@@ -18,7 +18,7 @@
         <el-col :span="8">
           <el-form-item prop="realName" label="真实姓名">
             <el-input
-              v-model="searchForm.realName"
+              v-model="searchForm.realname"
               placeholder="请输入真实姓名"
             ></el-input>
           </el-form-item>
@@ -26,7 +26,7 @@
         <el-col :span="8">
           <el-form-item label="电话号码" prop="cellPhone">
             <el-input
-              v-model="searchForm.cellPhone"
+              v-model="searchForm.cellphone"
               placeholder="请输入电话号码"
             ></el-input>
           </el-form-item>
@@ -46,7 +46,7 @@
         <el-col :span="8">
           <el-form-item label="创建时间" prop="createTime">
             <el-date-picker
-              v-model="searchForm.createTime"
+              v-model="searchForm.createAt"
               type="daterange"
               range-separator="To"
               start-placeholder="开始时间"
@@ -68,7 +68,7 @@
         icon="Search"
         type="primary"
         @click="handleQueryClick"
-        >搜索
+        >查询
       </el-button>
     </div>
   </div>
@@ -78,19 +78,22 @@
 import { reactive, ref } from 'vue'
 import type { ElForm } from 'element-plus'
 
+const emit = defineEmits(['queryClick', 'resetClick'])
+
 const searchForm = reactive({
   name: '',
-  realName: '',
-  cellPhone: '',
-  enable: 0,
-  createTime: [],
+  realname: '',
+  cellphone: '',
+  enable: '',
+  createAt: '',
 })
 const searchFormRef = ref<InstanceType<typeof ElForm>>()
 const handleResetClick = () => {
   searchFormRef.value?.resetFields()
+  emit('resetClick')
 }
 const handleQueryClick = () => {
-  console.log('search')
+  emit('queryClick', searchForm)
 }
 </script>
 

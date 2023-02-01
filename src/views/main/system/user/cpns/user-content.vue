@@ -2,7 +2,7 @@
   <div class="content">
     <div class="header">
       <h3 class="title">用户列表</h3>
-      <el-button type="primary">新建数据</el-button>
+      <el-button type="primary">新建用户</el-button>
     </div>
     <div class="table">
       <el-table :data="usersList" border style="width: 100%">
@@ -70,12 +70,37 @@
           </template>
         </el-table-column>
         <el-table-column align="center" label="操作">
-          <el-button icon="Edit" text type="primary">编辑</el-button>
-          <el-button icon="Delete" text type="danger">删除</el-button>
+          <template #default="scope">
+            <el-button
+              icon="Edit"
+              text
+              type="primary"
+              @click="handleEditClick(scope.row.id)"
+              >编辑
+            </el-button>
+            <el-button
+              icon="Delete"
+              text
+              type="danger"
+              @click="handleDeleteClick(scope.row.id)"
+              >删除
+            </el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
-    <div class="pagination"></div>
+    <div class="pagination">
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        small="small"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="usersTotalCount"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 </template>
 
@@ -83,11 +108,42 @@
 import userSystemStore from '@/stores/main/system'
 import { storeToRefs } from 'pinia'
 import { formatUTC } from '@/utils/format'
+import { ref } from 'vue'
 
 const systemStore = userSystemStore()
-systemStore.getUserListAction()
 
-const { usersList } = storeToRefs(systemStore)
+// 分页逻辑
+const currentPage = ref(1)
+const pageSize = ref(5)
+fetchUsersList()
+
+const { usersList, usersTotalCount } = storeToRefs(systemStore)
+
+const handleSizeChange = () => {
+  fetchUsersList()
+}
+const handleCurrentChange = () => {
+  fetchUsersList()
+}
+
+const handleDeleteClick = (id: string) => {
+  console.log('click delete', id)
+}
+
+const handleEditClick = (id: string) => {
+  console.log('click edit', id)
+}
+
+// 封装多次发送请求
+function fetchUsersList(formData: any = {}) {
+  const size = pageSize.value
+  const offset = (currentPage.value - 1) * size
+  const pageInfo = { size, offset }
+  const queryInfo = { ...pageInfo, ...formData }
+  systemStore.getUsersListAction(queryInfo)
+}
+
+defineExpose({ fetchUsersList })
 </script>
 
 <style lang="less" scoped>
@@ -116,6 +172,12 @@ const { usersList } = storeToRefs(systemStore)
       margin-left: 0;
       padding: 5px 18px;
     }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
   }
 }
 </style>

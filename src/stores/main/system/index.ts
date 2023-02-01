@@ -8,8 +8,8 @@ const userSystemStore = defineStore('system', {
     usersTotalCount: 0,
   }),
   actions: {
-    async getUserListAction() {
-      const usersListRes = await getUserList()
+    async getUsersListAction(queryInfo: any) {
+      const usersListRes = await getUserList(queryInfo)
       const { list, totalCount } = usersListRes.data
       this.usersList = list
       this.usersTotalCount = totalCount
