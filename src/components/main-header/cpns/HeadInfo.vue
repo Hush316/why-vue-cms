@@ -133,4 +133,7 @@ const toggleLocale = (mode: 'zh' | 'en') => {
     padding: 6px 22px;
   }
 }
+.el-dropdown-link {
+  cursor: pointer;
+}
 </style>

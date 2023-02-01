@@ -1,5 +1,5 @@
 import type { AccountType } from '@/types/login'
-import zjRequest from '..'
+import zjRequest from '@/service'
 
 // 账号登录
 export function accountLogin(account: AccountType) {
