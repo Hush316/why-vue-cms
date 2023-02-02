@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import PageSearch from '@/components/page-search/page-search.vue'
+import PageSearch from '@/views/main/system/department/cpns/page-search.vue'
 import PageContent from '@/views/main/system/department/cpns/page-content.vue'
 import { ref } from 'vue'
 import PageModal from '@/views/main/system/department/cpns/page-modal.vue'
-import searchConfig from '@/views/main/system/department/config/search.config'
 
 const contentRef = ref<InstanceType<typeof PageContent>>()
 const handleQueryClick = (queryInfo: any) => {
@@ -25,7 +24,6 @@ const handleEditClick = (row: any) => {
 <template>
   <div class="department">
     <PageSearch
-      :search-config="searchConfig"
       @queryClick="handleQueryClick"
       @resetClick="handleResetClick"
     ></PageSearch>

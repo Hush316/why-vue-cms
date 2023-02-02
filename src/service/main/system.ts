@@ -30,3 +30,33 @@ export function editUser(id: number, userInfo: any) {
     data: userInfo,
   })
 }
+
+// 针对页面的网络请求,增删改查
+export function getPageListData(pageName: string, queryInfo: any) {
+  return zjRequest.post({
+    url: `/${pageName}/list`,
+    data: queryInfo,
+  })
+}
+
+export function deletePageUserById(pageName: string, id: number) {
+  return zjRequest.delete({
+    url: `/${pageName}/${id}`,
+  })
+}
+
+// 创建用户
+export function createPageUser(pageName: string, pageInfo: any) {
+  return zjRequest.post({
+    url: `/${pageName}`,
+    data: pageInfo,
+  })
+}
+
+// 编辑用户
+export function editPageUser(pageName: string, id: number, pageInfo: any) {
+  return zjRequest.patch({
+    url: `/${pageName}/${id}`,
+    data: pageInfo,
+  })
+}
