@@ -1,17 +1,15 @@
 import { LOGIN_TOKEN } from '@/global/constants'
 import router from '@/router'
-import { accountLogin } from '@/service/login'
 import {
+  accountLogin,
   getUserInfoById,
   getUserMenusByRoleId,
-} from '@/service/login/index'
+} from '@/service/login'
 import type { AccountType } from '@/types/login'
 import { localCache } from '@/utils/cache'
-import {
-  mapMenuListToPermissions,
-  mapMenusToRoutes,
-} from '@/utils/mapMenus'
+import { mapMenuListToPermissions, mapMenusToRoutes } from '@/utils/mapMenus'
 import { defineStore } from 'pinia'
+import useMainStore from '@/stores/main'
 
 interface LoginState {
   token: string
@@ -48,8 +46,11 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userMenus', userMenus)
 
       //获取登录用户的按钮权限
-      const permissions = mapMenuListToPermissions(userMenus)
-      this.permissions = permissions
+      this.permissions = mapMenuListToPermissions(userMenus)
+
+      //获取所有roles/departments数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
       //动态添加路由
       const routes = mapMenusToRoutes(userMenus)
       routes.forEach((route) => {
@@ -68,9 +69,12 @@ const useLoginStore = defineStore('login', {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
+
+        //获取所有roles/departments数据
+        const mainStore = useMainStore()
+        mainStore.fetchEntireDataAction()
         //获取登录用户的按钮权限
-        const permissions = mapMenuListToPermissions(userMenus)
-        this.permissions = permissions
+        this.permissions = mapMenuListToPermissions(userMenus)
         // 动态添加路由
         const routes = mapMenusToRoutes(userMenus)
         routes.forEach((route) => {

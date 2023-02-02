@@ -50,10 +50,7 @@ const defaultActive = computed(() => {
               <span>{{ item.name }}</span>
             </template>
 
-            <template
-              v-for="subitem in item.children"
-              :key="subitem.id"
-            >
+            <template v-for="subitem in item.children" :key="subitem.id">
               <el-menu-item
                 :index="subitem.id + ''"
                 @click="handleItemClick(subitem)"

@@ -2,14 +2,13 @@
   <div class="content">
     <div class="header">
       <h3 class="title">用户列表</h3>
-      <el-button type="primary">新建用户</el-button>
+      <el-button type="primary" @click="handleNewUserClick"
+        >新建用户
+      </el-button>
     </div>
     <div class="table">
       <el-table :data="usersList" border style="width: 100%">
-        <el-table-column
-          align="center"
-          type="selection"
-        ></el-table-column>
+        <el-table-column align="center" type="selection"></el-table-column>
         <el-table-column
           type="index"
           align="center"
@@ -22,16 +21,8 @@
           label="用户名"
           width="120px"
         />
-        <el-table-column
-          prop="realname"
-          align="center"
-          label="真实姓名"
-        />
-        <el-table-column
-          prop="cellphone"
-          align="center"
-          label="手机号码"
-        />
+        <el-table-column prop="realname" align="center" label="真实姓名" />
+        <el-table-column prop="cellphone" align="center" label="手机号码" />
         <el-table-column
           prop="enable"
           align="center"
@@ -75,7 +66,7 @@
               icon="Edit"
               text
               type="primary"
-              @click="handleEditClick(scope.row.id)"
+              @click="handleEditClick(scope.row)"
               >编辑
             </el-button>
             <el-button
@@ -110,11 +101,12 @@ import { storeToRefs } from 'pinia'
 import userSystemStore from '@/stores/main/system'
 import { formatUTC } from '@/utils/format'
 
+const emit = defineEmits(['newUserClick', 'editUserClick'])
 const systemStore = userSystemStore()
 
 // 分页逻辑
 const currentPage = ref(1)
-const pageSize = ref(5)
+const pageSize = ref(10)
 fetchUsersList()
 
 const { usersList, usersTotalCount } = storeToRefs(systemStore)
@@ -126,12 +118,20 @@ const handleCurrentChange = () => {
   fetchUsersList()
 }
 
+// 删除
 const handleDeleteClick = (id: string) => {
-  console.log('click delete', id)
+  systemStore.deleteUserByIdAction(id)
+  fetchUsersList()
 }
 
-const handleEditClick = (id: string) => {
-  console.log('click edit', id)
+// 编辑
+const handleEditClick = (row: any) => {
+  emit('editUserClick', row)
+}
+
+//新建
+const handleNewUserClick = () => {
+  emit('newUserClick')
 }
 
 // 封装多次发送请求

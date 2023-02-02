@@ -26,9 +26,7 @@ export function mapMenusToRoutes(userMenus: any[]) {
   const routes: RouteRecordRaw[] = []
   for (const menu of userMenus) {
     for (const submenu of menu.children) {
-      const route = localRoutes.find(
-        (item) => item.path === submenu.url,
-      )
+      const route = localRoutes.find((item) => item.path === submenu.url)
       if (route) {
         // 给route的顶层菜单增加重定向功能(但是只需要添加一次即可)
         if (!routes.find((item) => item.path === menu.url)) {

@@ -12,11 +12,7 @@
         <el-input v-model="phoneInfo.phone" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input
-          show-password
-          type="password"
-          v-model="phoneInfo.password"
-        />
+        <el-input show-password type="password" v-model="phoneInfo.password" />
       </el-form-item>
     </el-form>
   </div>
