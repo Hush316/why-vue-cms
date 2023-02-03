@@ -6,7 +6,7 @@ const searchConfig = {
       prop: 'name',
       label: '角色名称',
       placeholder: '请输入查询的角色名称',
-      initialValue: '啊啊啊',
+      initialValue: '',
     },
     {
       type: 'input',

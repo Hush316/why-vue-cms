@@ -48,7 +48,6 @@ const userSystemStore = defineStore('system', {
     async getPageListAction(pageName: string, queryInfo: any) {
       const getRes = await getPageListData(pageName, queryInfo)
       const { totalCount, list } = getRes.data
-      console.log(totalCount, list)
       this.pageList = list
       this.pageTotalCount = totalCount
     },
@@ -58,12 +57,10 @@ const userSystemStore = defineStore('system', {
     },
     async createPageUserAcion(pageName: string, pageInfo: any) {
       const createRes = await createPageUser(pageName, pageInfo)
-      console.log(createRes)
       this.getPageListAction(pageName, { offset: 0, size: 10 })
     },
     async editPageUserAcion(pageName: string, id: number, pageInfo: any) {
       const editRes = await editPageUser(pageName, id, pageInfo)
-      console.log(editRes)
       this.getPageListAction(pageName, { offset: 0, size: 10 })
     },
   },
