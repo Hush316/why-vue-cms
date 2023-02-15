@@ -11,3 +11,9 @@ export function getEntireDepartments() {
     url: '/department/list',
   })
 }
+
+export function getEntireMenus() {
+  return zjRequest.post({
+    url: '/menu/list',
+  })
+}

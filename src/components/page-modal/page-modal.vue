@@ -42,6 +42,9 @@
                   </template>
                 </el-select>
               </template>
+              <template v-if="item.type === 'custom'">
+                <slot :name="item.slotName"></slot>
+              </template>
             </el-form-item>
           </template>
         </el-form>
@@ -61,7 +64,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import userSystemStore from '@/stores/main/system'
-import modalConfig from '@/views/main/system/department/config/modal.config'
 
 interface IProps {
   modalConfig: {
@@ -72,6 +74,7 @@ interface IProps {
     }
     formItems: any[]
   }
+  otherInfo?: any
 }
 
 const props = defineProps<IProps>()
@@ -98,7 +101,7 @@ function setModalVisible(type: 'edit' | 'create', row?: any) {
     isEdit.value = false
     editData.value = null
     for (const key in formData) {
-      const item = modalConfig.formItems.find((item) => item.prop === key)
+      const item = props.modalConfig.formItems.find((item) => item.prop === key)
       formData[key] = item ? item.initialValue : ''
     }
   }
@@ -106,14 +109,19 @@ function setModalVisible(type: 'edit' | 'create', row?: any) {
 
 const handleConfirmClick = () => {
   centerDialogVisible.value = false
+
+  let infoData = { ...formData }
+  if (props.otherInfo) {
+    infoData = { ...infoData, ...props.otherInfo }
+  }
   if (isEdit.value && editData.value) {
     systemStore.editPageUserAcion(
-      modalConfig.pageName,
+      props.modalConfig.pageName,
       editData.value.id,
-      formData,
+      infoData,
     )
   } else {
-    systemStore.createPageUserAcion(modalConfig.pageName, formData)
+    systemStore.createPageUserAcion(props.modalConfig.pageName, infoData)
   }
 }
 

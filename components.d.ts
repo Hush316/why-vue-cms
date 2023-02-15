@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    2: typeof import('./src/components/main-menu/2.vue')['default']
-    ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -32,7 +30,6 @@ declare module '@vue/runtime-core' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
@@ -42,9 +39,9 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    ElTree: typeof import('element-plus/es')['ElTree']
     HeadCrumb: typeof import('./src/components/main-header/cpns/HeadCrumb.vue')['default']
     HeadInfo: typeof import('./src/components/main-header/cpns/HeadInfo.vue')['default']
-    Info: typeof import('./src/components/main-header/cpns/HeadInfo.vue')['default']
     MainHeader: typeof import('./src/components/main-header/index.vue')['default']
     MainMenu: typeof import('./src/components/main-menu/index.vue')['default']
     PageContent: typeof import('./src/components/page-content/page-content.vue')['default']

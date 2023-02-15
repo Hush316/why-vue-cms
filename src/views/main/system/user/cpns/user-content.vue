@@ -60,7 +60,7 @@
             {{ formatUTC(scope.row.createAt) }}
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作">
+        <el-table-column align="center" label="操作" width="210px">
           <template #default="scope">
             <el-button
               icon="Edit"

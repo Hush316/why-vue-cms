@@ -1,5 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <div>category</div>
+  <div>
+    <h2>category</h2>
+  </div>
 </template>
+
 <style scoped></style>

@@ -62,6 +62,7 @@ interface BreadCrumbs {
   name: string
   path: string
 }
+
 // 获取当前页面面包屑
 export function mapPathToBreadcrumbs(path: string, userMenus: any[]) {
   const breadCrumbs: BreadCrumbs[] = []
@@ -93,6 +94,25 @@ export function mapMenuListToPermissions(menuList: any[]) {
       }
     }
   }
+
   recurseGetPermission(menuList)
   return permissions
+}
+
+// 角色权限映射到id的列表
+export function mapMenuListToIds(menuList: any[]) {
+  const ids: number[] = []
+
+  function recurseGetId(menus: any[]) {
+    for (const item of menus) {
+      if (item.children) {
+        recurseGetId(item.children)
+      } else {
+        ids.push(item.id)
+      }
+    }
+  }
+
+  recurseGetId(menuList)
+  return ids
 }
